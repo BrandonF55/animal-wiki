@@ -1,16 +1,33 @@
-onload = function() {
+function hide() {
+  const pig = document.getElementById("pig");
+  const cow = document.getElementById("cow");
+  const other = document.getElementById("other");
+
+  pig.classList.add("hidden");
+  cow.classList.add("hidden");
+  other.classList.add("hidden");
+}
+
+function animals() {
   const form = document.querySelector('form');
   console.log("on load ran");
-  form.onsubmit = function(submission) {
+  form.addEventListener("submit", function (submission) {
+    hide();
     const animal = document.querySelector("#animal").value;
-    console.log("form sent");
-    if (animal === "pig") {
-      document.querySelector("#pig").removeAttribute("class");
-    } else if (animal === "cow") {
-      document.querySelector("#cow").removeAttribute("class");
-    } else {
+    if (animal !== "pig" && animal !== "cow") {
       document.querySelector("#other").removeAttribute("class");
+    } else {
+      if (animal === "pig") {
+        document.querySelector("#pig").removeAttribute("class");
+      } else if (animal === "cow") {
+        document.querySelector("#cow").removeAttribute("class");
+      }
     }
     submission.preventDefault();
   }
+  );
 }
+
+addEventListener("load", function () {
+  animals();
+})
